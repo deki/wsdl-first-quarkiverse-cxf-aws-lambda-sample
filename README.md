@@ -17,20 +17,22 @@ Please follow the [prerequisites in the Quarkus Guide](https://quarkus.io/guides
 
     sam deploy -t target/sam.jvm.yaml -g --stack-name cxf-wsdl-first-sample-app
     
-Confirm (with y) that it's ok do not have authorization for testing.
+Confirm (with `y`) that it's ok do not have authorization for testing.
     
 ### Test
 
 1. Copy the URL (similar to `http://XXXXX.execute-api.REGION.amazonaws.com/`) from the Outputs and append `services/customerService`.
 2. Run
 
+    ```
     curl -X POST -d '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://customerservice.example.com/"><soapenv:Body><cus:getCustomersByName><name>My test customername</name></cus:getCustomersByName></soapenv:Body></soapenv:Envelope>' http://XXXXX.execute-api.REGION.amazonaws.com/services/customerService | xmllint --format -
+    ```
 
 ### Logs
 
 Check the logs for Init Duration:
 
-   sam logs --stack-name cxf-wsdl-first-sample-app --start-time '1min ago' 
+    sam logs --stack-name cxf-wsdl-first-sample-app --start-time '1min ago' 
 
 Likely it is a high value (>5000ms).
 
@@ -47,14 +49,14 @@ Check the [Quarkus guide](https://quarkus.io/guides/amazon-lambda-http#build-and
 
     sam deploy -t target/sam.native.yaml -g --stack-name cxf-wsdl-first-sample-native-app
     
-Confirm (with y) that it's ok do not have authorization for testing.
+Confirm (with `y`) that it's ok do not have authorization for testing.
 
 ### Test
 
-See above (but make sure to use the different URL).
+See [above](#test) (but make sure to use the different URL).
 
 ### Logs
 
-   sam logs --stack-name cxf-wsdl-first-sample-native-app --start-time '1min ago' 
+    sam logs --stack-name cxf-wsdl-first-sample-native-app --start-time '1min ago' 
 
 The duration compared to the Java runtime above is much lower.
