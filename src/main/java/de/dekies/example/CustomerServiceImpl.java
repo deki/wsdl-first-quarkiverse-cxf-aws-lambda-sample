@@ -20,7 +20,7 @@ package de.dekies.example;
 
 import com.example.customerservice.*;
 
-import javax.jws.WebService;
+import jakarta.jws.WebService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
