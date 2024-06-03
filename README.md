@@ -36,6 +36,16 @@ Check the logs for Init Duration:
 
 Likely it is a high value (>5000ms).
 
+### Activate AWS Lambda SnapStart
+
+[AWS Lambda SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) helps optimizing the coldstart time.
+Add the following to the Properties section of target/sam.jvm.yaml:
+
+    SnapStart:
+      ApplyOn: PublishedVersions
+    AutoPublishAlias: SnapStart
+
+Redeploy and test as above.
 
 ## Custom runtime (GraalVM)
 
@@ -49,6 +59,11 @@ Check the [Quarkus guide](https://quarkus.io/guides/amazon-lambda-http#build-and
 
     sam deploy -t target/sam.native.yaml -g --stack-name cxf-wsdl-first-sample-native-app
     
+Add ARM64 architecture depending where you are building
+
+    Architectures:
+      - arm64
+
 Confirm (with `y`) that it's ok do not have authorization for testing.
 
 ### Test
