@@ -22,10 +22,7 @@ import com.example.customerservice.*;
 
 import jakarta.jws.WebService;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 // copied from https://github.com/apache/cxf/blob/master/distribution/src/main/release/samples/wsdl_first/src/main/java/com/example/customerservice/server/CustomerServiceImpl.java
 @WebService(endpointInterface = "com.example.customerservice.CustomerService", serviceName = "CustomerService")
@@ -43,13 +40,14 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customers = new ArrayList<>();
         for (int c = 0; c < 2; c++) {
             Customer cust = new Customer();
-            cust.setName(name);
+            cust.setCustomerId(c);
+            cust.setName(name + " " + c);
             cust.getAddress().add("Pine Street 200");
-            Date bDate = new GregorianCalendar(2009, 01, 01).getTime();
+            Date bDate = new GregorianCalendar(2009, Calendar.JANUARY, 1).getTime();
             cust.setBirthDate(bDate);
             cust.setNumOrders(1);
-            cust.setRevenue(10000);
-            cust.setTest(new BigDecimal(1.5));
+            cust.setRevenue(c*10000);
+            cust.setTest(new BigDecimal("1.5"));
             cust.setType(CustomerType.BUSINESS);
             customers.add(cust);
         }
